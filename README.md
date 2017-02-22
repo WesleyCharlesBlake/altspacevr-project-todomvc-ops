@@ -27,6 +27,10 @@ To Do:
 - [ ] Business intelligence and reporting from the APM metrics
 
 Somethings to take note of:
+I used the Django flavour of the application.
+
+I changed the application to use a Postgres database, and I have passed the django DB settings via environment variables. I also fronted the application with nginx, and the application container only runs uwsgi. I then created a volume in the application image, which can then be used to mount on the web container (`volumes_from`), this is so I could get the application static files in the web container, with out creating a custom NGINX configuration.
+
 In order to get the migrations to run correctly, I needed to wait for the DB container to be ready before the app container ran. the app container entry point is to run the `/app-entrypoint.sh` script, which bootstraps the app, and starts uwsgi. I encountered issues where compose would start this container before the db container was ready to accept TCP connections. 
 
 The simplest way I could get around this was to create a `sleep 15` statement at the begining of entry point script. This stalled the running of migrations long enough for the DB container to be ready. For this use case, it works fine, however in more complicated deployments, this could most likely cause issues.
