@@ -32,3 +32,11 @@ services:
         - todomvc     
       depends_on:
         - "todomvc" 
+    dd-agent:
+      image: datadog/docker-dd-agent:latest
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+        - /proc/:/host/proc/:ro
+        - /sys/fs/cgroup/:/host/sys/fs/cgroup
+      environment:
+        API_KEY: 'your-datadog-api-key'

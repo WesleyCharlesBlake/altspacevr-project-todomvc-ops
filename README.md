@@ -12,5 +12,5 @@ To Do:
 - [x] App backed by RDBMS (Postgres)
 - [x] App behind Nginx 
 - [x] Automated app setup (syncdb, environment variables etc)
-- [ ] Automated monitoring stack 
+- [x] Automated monitoring stack (datadog) 
 
